@@ -1,4 +1,4 @@
-# alien-test
+# alient-detector
 
 ## Project setup
 ```
