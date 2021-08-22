@@ -17,17 +17,20 @@
       />
     </div>
   </div>
-  <button @click="handleTest()">Test DNA</button>
-  <div>
-    <div v-if="this.testPositive">
-      <strong>Result: Alien DNA detected</strong>
-    </div>
-    <div v-if="!this.testPositive && !this.pristine">Result: Human DNA</div>
 
-    <div v-if="this.testResults.diagonal">+ Diagonal</div>
-    <div v-if="this.testResults.diagonalInv">+ Diagonal Inv</div>
-    <div v-if="this.testResults.horizontal">+ Horizontal</div>
-    <div v-if="this.testResults.vertical">+ Vertical</div>
+  <button class="testButton" @click="handleTest()">Test DNA</button>
+
+  <div class="testResults" v-if="!this.pristine">
+    <h2>Result:</h2>
+    <p v-if="this.testPositive">Alien DNA detected!</p>
+    <p v-if="!this.testPositive && !this.pristine">Human DNA</p>
+
+    <ul>
+      <li v-if="this.testResults.diagonal">Diagonal Chain: positive</li>
+      <li v-if="this.testResults.diagonalInv">Inv Diagonal Chain: positive</li>
+      <li v-if="this.testResults.horizontal">Horizontal Chain: positive</li>
+      <li v-if="this.testResults.vertical">Vertical Chain: positive</li>
+    </ul>
   </div>
 </template>
 
@@ -262,19 +265,70 @@ export default {
   .dnaRow {
     display: flex;
     flex-flow: row nowrap;
-    background-color: purple;
+    justify-content: space-between;
     height: calc(100% / 6);
+    margin-left: -4px;
+    margin-right: -4px;
 
     input {
+      background-color: #f1f1f1;
+      border: 0;
+      border-radius: 4px;
+      color: #22577a;
       display: inline-block;
-      width: calc(100% / 6);
+      font-family: "Signika", Helvetica, Arial, sans-serif;
+      font-size: 1.4em;
+      margin: 4px;
+      outline-color: #22577a;
       text-align: center;
       text-transform: uppercase;
+      width: calc(100% / 6);
     }
 
     input[data-active="true"] {
-      background: gray;
+      background: #57cc99;
+      color: #fefefe;
     }
+  }
+}
+
+.testButton {
+  background-color: #22577a;
+  border: 0;
+  color: #fefefe;
+  cursor: pointer;
+  font-family: "Signika", Helvetica, Arial, sans-serif;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin: 1.5em 0;
+  padding: 0.5em 1em;
+}
+
+.testResults {
+  background-color: #c7f9cc;
+  box-sizing: border-box;
+  color: #22577a;
+  padding: 1em;
+  width: 400px;
+
+  h2 {
+    display: inline;
+    font-family: "Signika", Helvetica, Arial, sans-serif;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin: 0 0.5em 0.5em 0;
+  }
+
+  p {
+    font-size: 1.2em;
+    display: inline;
+    margin-bottom: 0;
+  }
+
+  ul {
+    margin: 1em 0 0 0;
+    padding: 0;
+    list-style-position: inside;
   }
 }
 </style>
